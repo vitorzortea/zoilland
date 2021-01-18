@@ -1,5 +1,6 @@
 import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpService } from 'src/app/services/http.service';
 
 @Component({
@@ -20,11 +21,10 @@ export class CriarComponent implements OnInit {
   samePass = false
   erroPass = '';
 
-  headers = new HttpHeaders();
-
 
   constructor(
-   private api: HttpService
+   private api: HttpService,
+   private router: Router
   ) { }
 
   ngOnInit() {
@@ -49,14 +49,12 @@ export class CriarComponent implements OnInit {
         this.api.post('login', {email: this.email, senha: this.senha}).subscribe(
           (res: {auth, token})=>{
             localStorage.setItem('user', res.token);
+            this.router.navigate(['/']);
           },
-          (error)=>{alert('Errou rude! 2'); console.log(error);}
+          (error)=>{console.log(error);}
         )
       },
-      (error)=>{
-        alert('Errou rude!');
-        console.log(error)
-      }
+      (error)=>{console.log(error)}
     )
   }
 

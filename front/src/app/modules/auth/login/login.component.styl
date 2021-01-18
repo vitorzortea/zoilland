@@ -40,6 +40,9 @@ section
       box-shadow: 0 0 0 2px #e7f3ff
       caret-color: #1877f2
 
+    &.input-error, &.input-error:focus, &.input-error:hover
+      border-left: solid 5px red
+
   input:-webkit-autofill,
   input:-webkit-autofill:hover,
   input:-webkit-autofill:focus,
@@ -66,14 +69,21 @@ section
       &:hover
         background-color: #fb5107
 
-    p
-      text-align: center
-      padding-top: 20px
-      font-size: 14px
-      color: #fb5107
+  a
+    display: table
+    margin: 0 auto
+    font-size: 14px
+    color: #fb5107
+    margin-top: 20px
 
-      &:hover
-        text-decoration: underline
+    &:hover
+      text-decoration: underline
+
+  p.error
+    text-align: left
+    padding: 0 0 20px
+    color: #F44336
+    margin-top: -15px
 
   #bt-conta
     border: none

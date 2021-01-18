@@ -6,9 +6,9 @@
     <input [ngClass]="{'input-error': erroPass}" [(ngModel)]="senha"type="password" name="senha" placeholder="Senha" (change)="verifyPass()">
     <input [ngClass]="{'input-error': erroPass}" [(ngModel)]="confSenha"type="password" name="conf-senha" placeholder="Confirmar Senha" (change)="verifyPass()">
     <p class="error" *ngIf="erroPass"><i class="fas fa-exclamation-triangle"></i> {{erroPass}}</p>
-    <button (click)="createUser()">Entrar</button>
+    <button (click)="createUser()">Criar</button>
   </form>
   <p>
-    <a routerLink="/">Voltar</a>
+    <a routerLink="/auth">Voltar</a>
   </p>
 </section>

@@ -1,12 +1,11 @@
 <section>
   <h2>Entrar</h2>
   <form>
-    <input type="email" name="email" placeholder="Email">
-    <input type="password" name="senha" placeholder="Senha">
-    <button>Entrar</button>
-    <p>
-      <a routerLink="/recuperacao-senha">Esqueceu Senha</a>
-    </p>
+    <input [ngClass]="{'input-error': error}" [(ngModel)]="email" type="email" name="email" placeholder="Email">
+    <input [ngClass]="{'input-error': error}" [(ngModel)]="senha" type="password" name="senha" placeholder="Senha">
+    <p class="error" *ngIf="error"><i class="fas fa-exclamation-triangle"></i> {{error}}</p>
+    <button (click)="entrar()" >Entrar</button>
+    <a routerLink="/auth/recuperacao-senha">Esqueceu Senha</a>
   </form>
-  <button routerLink="/criar-conta" id="bt-conta">Criar nova conta</button>
+  <button routerLink="/auth/criar-conta" id="bt-conta">Criar nova conta</button>
 </section>
