@@ -1,11 +1,12 @@
 <section>
   <h2>Criar Conta</h2>
   <form>
-    <input type="text" name="nome" placeholder="Nome">
-    <input type="email" name="email" placeholder="Email">
-    <input type="password" name="senha" placeholder="Senha">
-    <input type="password" name="conf-senha" placeholder="Confirmar Senha">
-    <button>Entrar</button>
+    <input [(ngModel)]="nome" type="text" name="nome" placeholder="Nome">
+    <input [(ngModel)]="email" type="email" name="email" placeholder="Email">
+    <input [ngClass]="{'input-error': erroPass}" [(ngModel)]="senha"type="password" name="senha" placeholder="Senha" (change)="verifyPass()">
+    <input [ngClass]="{'input-error': erroPass}" [(ngModel)]="confSenha"type="password" name="conf-senha" placeholder="Confirmar Senha" (change)="verifyPass()">
+    <p class="error" *ngIf="erroPass"><i class="fas fa-exclamation-triangle"></i> {{erroPass}}</p>
+    <button (click)="createUser()">Entrar</button>
   </form>
   <p>
     <a routerLink="/">Voltar</a>
