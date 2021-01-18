@@ -1,0 +1,36 @@
+section
+  width: 100%
+  min-height: 100vh
+  display: flex
+
+  &>div
+    width: 50%
+    position: relative
+
+    &>span
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+
+  &>div, &>div>span
+    background-size: cover
+    background-position: center
+
+  main
+    width: 50%
+    background: #1b1b1b
+    color: #929292
+    box-shadow: 0 0 50px rgb(0 0 0 / 0.3)
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    position: relative
+    z-index: 2
+
+    &>h1
+      width: 350px
+      max-width: 100%
+      margin-bottom: 40px

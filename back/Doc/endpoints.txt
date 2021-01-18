@@ -1,0 +1,18 @@
+==== Autenticação ====
+    //Login - Post | /login
+        body {email / senha}
+        enviar um token de acesso;
+
+==== Usuário ====
+    //Criar - Post | /user
+        Cria uma Bolsa {idbolsa, item_iditem }
+        Cria um Usuario {idusers, nome, email, avatar, createOn, zoicoin, bolsa_idbolsa }
+
+==== Pet ====
+    //Criar - Post | /pet
+        Cria um pet {idpet, nome, nivel, coleta, data, diversao, fome, energia, higiente, genero, users_idusers, especie_idespecie}
+
+    //Ler Lista do User - Get || /pet/:users_idusers
+        Retorna um array de pets [{idpet, nome, nivel, coleta, data, diversao, fome, energia, higiente, genero, users_idusers, especie_idespecie}]
+        Retorna um array de especie [{ Textos completos, idespecie, nome, tipo, pic0, pic1, pic2, pic3, dia1, dia2, dia3}]
+        Formarta para JSON consumir no front como BD não relacional.

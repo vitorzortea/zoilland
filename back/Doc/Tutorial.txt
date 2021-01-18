@@ -1,0 +1,47 @@
+1) Primeiramente instalar o Nodemon
+    npm install -g nodemon
+
+
+2) Iniciar o repositório NPM
+    npm init
+
+    //Instalar Todos de uma vez, ou instale um por um nos passos 3,4 e 5
+    npm i --save restify restify-errors knex mysql
+
+
+3) instalar o Module Restfy
+    npm install restify --save
+
+
+4) instalar o Restfy-erros
+    npm install restify-errors  --save 
+
+
+5) instalar o Knex para acessar o MYSQL
+    npm install knex --savec
+
+
+6) Crie o index.js na pasta raiz
+
+
+7) Cole o código do server que está no Git do Restfy dentro do index
+    https://github.com/restify/node-restify
+
+
+8) Adicione a referencia dos errors
+    const errs = require('restify-errors');
+
+
+9) Abaixo da iniciação do servidor, adicione a referencia do Knex dado como exemplo no proprio site dele.
+    http://knexjs.org/
+
+
+10) Delete a rota do exemplo para comerçamos fazer a nossa propria rota REST
+
+
+11) Crienado a rota no video no 5:00.
+    https://www.youtube.com/watch?v=Hel9igamKF0
+
+
+12) Rodar a aplicação para teste
+    nodemon index.js

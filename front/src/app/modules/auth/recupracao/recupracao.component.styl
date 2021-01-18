@@ -1,0 +1,99 @@
+section
+  animation opacide-main 1s forwards
+
+  h2
+    display: flex
+    text-transform: uppercase
+    font-size: 22px
+    align-items: center
+    margin-bottom: 20px
+    color: white
+
+    &:after, &:before
+      content: ''
+      display: table
+      flex: auto
+      height 2px
+      background-color: #3c3c3c
+
+    &:after
+      margin-left: 20px
+
+    &:before
+      margin-right: 20px
+
+  input
+    background-color: #0c0c0c
+    border: 1px solid #484848
+    color: white
+    font-size: 17px
+    line-height: 1em
+    padding: 14px 16px
+    border-radius: 6px
+    display: table
+    margin-bottom: 15px
+    width: 400px
+    max-width: 100%
+
+    &:focus, &:hover
+      border-color: #1877f2
+      box-shadow: 0 0 0 2px #e7f3ff
+      caret-color: #1877f2
+
+  input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active
+    -webkit-box-shadow: 0 0 0 30px #0c0c0c inset !important
+    -webkit-text-fill-color: white !important;
+
+  form
+    padding-bottom: 20px
+    margin-bottom: 20px
+    border-bottom: 2px solid #3c3c3c
+
+    button
+      background-color: #fb8807
+      border: none
+      border-radius: 6px
+      font-size: 20px
+      line-height: 1em
+      padding: 14px 16px
+      width: 400px
+      max-width: 100%
+      color: white
+
+      &:hover
+        background-color: #fb5107
+
+    p
+      text-align: center
+      padding-top: 20px
+      font-size: 14px
+      color: #fb5107
+
+      &:hover
+        text-decoration: underline
+
+  #bt-conta
+    border: none
+    border-radius: 6px
+    font-size: 17px
+    line-height: 1em
+    padding: 14px 30px
+    background-color: #efdb01
+    margin: 0 auto
+    color: #423d0c
+    display: table
+
+  button
+    cursor: pointer
+
+@keyframes opacide-main
+  0%
+    opacity 0
+    transform translate(0, 10px)
+
+  100%
+    opacity 1
+    transform translate(0, 0)

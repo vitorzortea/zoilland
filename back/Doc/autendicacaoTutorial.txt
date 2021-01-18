@@ -1,0 +1,60 @@
+===========================
+======= GERAR TOKEN =======
+===========================
+
+1) Intale a extenção Jsonwebtoken
+    npm i jsonwebtoken
+
+2) carrege a extenção no index.js
+    const jwt = require('jsonwebtoken');
+
+3) Gerar um token quando o login e senha estão corretos
+    const token = jwt.sign()
+
+4) Dentro da função sing passe em um obj as informações a serem codificadas (Ex: id do user);
+    const token = jwt.sign({idusers: dados.idusers})
+
+5) Além do obj passamos uma senha do sistema como segundo parametro
+    const SECRET = 'meuSecret';
+    ...
+    const token = jwt.sign({idusers: dados.idusers}, SECRET)
+
+5) No terceiro parametro é um objeto com as opções do toke(Ex.: expiresIn que é o tempo que o token é valido)
+    const token = jwt.sign({idusers: dados.idusers}, SECRET, {expiresIn: 300}
+
+
+
+===============================
+======= VERIFICAR TOKEN =======
+===============================
+
+1) Crie uma função para verificação
+    function verifyJWT(req, res){}
+
+2) Dentro da função salve o toke vindo do header do front
+    function verifyJWT(req, res){ const token = req.headers['x-access-token'] }
+
+3) Agora use a função verify da extenção para verificar o token salvo
+    function verifyJWT(req, res){
+        const token = req.headers['x-access-token'];
+        jwt.verify(token, SECRET);
+    }
+
+4) No terceiro parametro da function verify é o callback
+    function verifyJWT(req, res){
+        const token = req.headers['x-access-token'];
+        jwt.verify(token, SECRET, (err, decoded)=> {});
+    }
+
+5) Dentro do callback retorne a resposta de erro ou aprovação
+    function verifyJWT(req, res, next){
+        const token = req.headers['x-access-token'];
+        jwt.verify(token, SECRET, (err, decoded)=> {
+            if(err) return res.send(new errs.BadRequestError('Não autorizado'))
+            req.userId = decoded.idusers
+        });
+        next();
+    }
+
+6) na rota que precisa de autenticação chame a função no parametro
+    server.get('/', verifyJWT, (req, res, next) => {}
