@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { HttpService } from 'src/app/services/http.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,12 +11,11 @@ export class LoginComponent implements OnInit {
   email: string;
   senha: string;
 
-  error = '';
+  error;
 
 
   constructor(
-   private api: HttpService,
-   private router: Router
+   private api: AuthService,
   ) { }
 
   ngOnInit() {
@@ -28,14 +26,9 @@ export class LoginComponent implements OnInit {
       this.error = 'Preencha todos os campos';
       return
     }
-    this.api.post('login', {email: this.email, senha: this.senha}).subscribe(
-      (res: {token})=>{
-        localStorage.setItem('user', res.token);
-        this.router.navigate(['/']);
-      },
-      (error)=>{
-        this.error = error.error.message;
-      }
+    this.api.loginAPI({email: this.email, senha: this.senha}).subscribe(
+      (res: {user, token})=>{this.api.login(res)},
+      (error)=>{ this.error = error.error.message; }
     );
   }
 

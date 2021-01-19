@@ -1,7 +1,5 @@
-import { HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { HttpService } from 'src/app/services/http.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
   selector: 'app-criar',
@@ -23,8 +21,7 @@ export class CriarComponent implements OnInit {
 
 
   constructor(
-   private api: HttpService,
-   private router: Router
+   private api: AuthService,
   ) { }
 
   ngOnInit() {
@@ -34,28 +31,17 @@ export class CriarComponent implements OnInit {
     if(!this.samePass){
       alert('O campo "Senha" e o campo "Confirmar Senha" tem que ser iguais')
       return
+    }else{
+      const body = {
+        nome: this.nome,
+        email: this.email,
+        senha: this.senha,
+        avatar: this.avatar,
+        createOn: this.createOn,
+        zoicoin: this.zoicoin,
+      }
+      this.api.criarConta(body);
     }
-    const body = {
-      nome: this.nome,
-      email: this.email,
-      senha: this.senha,
-      avatar: this.avatar,
-      createOn: this.createOn,
-      zoicoin: this.zoicoin,
-    }
-    this.api.post('newuser', body).subscribe(
-      (res)=>{
-        alert('Usuário criado');
-        this.api.post('login', {email: this.email, senha: this.senha}).subscribe(
-          (res: {auth, token})=>{
-            localStorage.setItem('user', res.token);
-            this.router.navigate(['/']);
-          },
-          (error)=>{console.log(error);}
-        )
-      },
-      (error)=>{console.log(error)}
-    )
   }
 
   verifyPass(){

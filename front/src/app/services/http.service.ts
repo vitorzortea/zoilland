@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import	{	environment	}	from	'src/environments/environment';
 
 
@@ -13,17 +13,10 @@ export class HttpService {
   ) { }
 
   baseURL = environment.api;
+  httpOptions = { headers: new HttpHeaders({'x-access-token': localStorage.getItem('token')}) }
 
-  get(url) {
-    return this.http.get(this.baseURL+url);
-  }
-  post(url, body, httpOptions?) {
-    return (httpOptions) ? this.http.post(this.baseURL+url, body, httpOptions) : this.http.post(this.baseURL+url, body);
-  }
-  put(url, body, httpOptions?) {
-    return (httpOptions) ? this.http.put(this.baseURL+url, body, httpOptions) : this.http.put(this.baseURL+url, body);
-  }
-  delete(url, httpOptions?) {
-    return (httpOptions) ? this.http.delete(this.baseURL+url, httpOptions) : this.http.delete(this.baseURL+url);
-  }
+  get(url) { return this.http.get(this.baseURL+url, this.httpOptions) }
+  post(url, body) { return this.http.post(this.baseURL+url, body, this.httpOptions) }
+  put(url, body) { return this.http.put(this.baseURL+url, body, this.httpOptions) }
+  delete(url) { return this.http.delete(this.baseURL+url, this.httpOptions) }
 }
