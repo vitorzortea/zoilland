@@ -8,6 +8,8 @@ import { Component, OnInit } from '@angular/core';
 export class CriarPetComponent implements OnInit {
 
   constructor() { }
+  tipo: string = 'fogo';
+  nome: string;
 
   ngOnInit() {
   }

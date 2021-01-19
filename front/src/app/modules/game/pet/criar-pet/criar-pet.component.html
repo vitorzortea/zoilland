@@ -1,1 +1,33 @@
-<p>criar-pet works!</p>
+<form>
+  <div>
+    <img src="/assets/img/pet/ovo/{{tipo}}.png" alt="Ovo">
+    <div>
+      <h2>Criar um Pet</h2>
+      <p>Ecolha um elemento:</p>
+      <label>
+        <input [(ngModel)]="tipo" select type="radio" name="type" value="fogo">
+        <img src="/assets/img/pet/tipo/fogo.png" alt="Fogo" title="Fogo" />
+      </label>
+      <label>
+        <input [(ngModel)]="tipo" type="radio" name="type" value="agua">
+        <img src="/assets/img/pet/tipo/agua.png" alt="Água" title="Água" />
+      </label>
+      <label>
+        <input [(ngModel)]="tipo" type="radio" name="type" value="planta">
+        <img src="/assets/img/pet/tipo/planta.png" alt="Planta" title="Planta" />
+      </label>
+      <label>
+        <input [(ngModel)]="tipo" type="radio" name="type" value="luz">
+        <img src="/assets/img/pet/tipo/luz.png" alt="Luz" title="Luz" />
+      </label>
+      <label>
+        <input [(ngModel)]="tipo" type="radio" name="type" value="trevas">
+        <img src="/assets/img/pet/tipo/trevas.png" alt="Trevas" title="Trevas" />
+      </label>
+    </div>
+  </div>
+
+  <input [(ngModel)]="nome" type="text" name="nome-pet" placeholder="Nome do Pet">
+
+  <button>Criar</button>
+</form>

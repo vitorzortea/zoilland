@@ -1,0 +1,92 @@
+form
+  &>div
+    padding: 10px 10px 0
+    background-color: #ededed
+    display: flex
+    align-items: flex-end
+    justify-content: center
+    margin-bottom: 80px
+    border-bottom: solid 2px #777569
+
+    &>img
+      max-width: 170px
+      margin-bottom: -60px
+      margin-right: 10px
+
+    &>div
+      margin-bottom: -28px
+
+      h2
+        font-size: 26px
+        margin-bottom: 20px
+
+      p
+        margin-bottom: 10px
+
+      img
+        width: 40px
+        margin-right: 10px
+        transition: .5s
+        filter: grayscale(1)
+        line-height: 0
+        border: solid 2px #777569
+        border-radius: 50%
+        background-color: #777569
+
+        &:hover
+          cursor pointer
+          filter: grayscale(0.2)
+
+      input
+        display: none
+
+        &:checked+img
+          filter: grayscale(0)
+          transform: scale(1.2)
+
+  &>input
+      background-color: white
+      border: 1px solid #d4d2ca
+      color: #867867
+      font-size: 16px
+      line-height: 1em
+      padding: 12px 15px
+      border-radius: 6px
+      display: table
+      margin: 0 auto 20px
+      width: 100%
+      max-width: 400px
+
+      &:focus, &:hover
+        border-color: #ff9800
+        box-shadow: 0 0 0 2px #e7f3ff
+        caret-color: #ff9800
+
+      &.input-error, &.input-error:focus, &.input-error:hover
+        border-left: solid 5px red
+
+    &:-webkit-autofill,
+    &:-webkit-autofill:hover,
+    &:-webkit-autofill:focus,
+    &:-webkit-autofill:active
+      -webkit-box-shadow: 0 0 0 30px white inset !important
+      -webkit-text-fill-color: #867867 !important;
+
+   button
+      display: table
+      background-image: linear-gradient(to bottom, #ffac00 5%, #ffc644 15%, #ffac00 20%, #ff5000)
+      border: solid 1px #dd4e1d
+      border-radius: 6px
+      font-size: 20px
+      line-height: 1em
+      padding: 14px 16px
+      width: 100%
+      max-width: 400px
+      margin: 0 auto
+      color: #fff
+      text-shadow: -1px -1px #e74a00
+      font-weight: bold
+
+      &:hover
+        background-image: linear-gradient(to bottom, #ff7f00 5%, #ffac00 15%, #ff7f00 20%, #e74d00)
+
