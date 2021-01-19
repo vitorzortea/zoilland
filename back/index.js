@@ -108,23 +108,22 @@ server.post('/pet/create', verifyJWT, (req, res, next) => {
     const token = req.headers['x-access-token'];
     const decoded = jwt.verify(token, SECRET);
     const userId = decoded.idusers;
-    const body = JSON.parse(req.body);
     knex('pet')
         .insert({
-            nome: body.nome,
-            nivel: 0,
+            nome: req.body.nome,
+            nivel: 1,
             coleta: 0,
             data: new Date(),
             diversao: 100,
             fome: 100,
             energia: 100,
             higiente: 100,
-            genero: body.genero,
+            genero: req.body.genero,
             users_idusers: userId,
-            especie_idespecie: body.tipo
+            especie_idespecie: req.body.tipo
         })
         .then((dados) => {
-            res.send({message: 'Pet Criado', pet: dados, mandando: body});
+            res.send({message: 'Pet Criado', pet: dados, body: req.body});
         }, next)
 });
 
