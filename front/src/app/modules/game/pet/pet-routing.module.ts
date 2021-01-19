@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { GameComponent } from './game.component';
-import { PetComponent } from './pet/pet.component';
+import { CriarPetComponent } from './criar-pet/criar-pet.component';
+import { PetComponent } from './pet.component';
 
 const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: 'pet'
+    redirectTo: 'novo-pet'
   },
   {
     path: '',
-    component: GameComponent,
+    component: PetComponent,
     children: [
       {
-        path: 'pet',
-        loadChildren: './pet/pet.module#PetModule'
+        path: 'novo-pet',
+        component: CriarPetComponent
       }
     ]
   }
@@ -25,4 +25,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class GameRoutingModule { }
+export class PetRoutingModule { }

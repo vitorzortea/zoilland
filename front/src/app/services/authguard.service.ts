@@ -21,7 +21,6 @@ export class AuthguardService implements CanActivate {
     if(!token){
       return this.router.navigate(['/auth']);
     }
-    //this.api.setHeader();
     this.user.get();
     return true;
   }

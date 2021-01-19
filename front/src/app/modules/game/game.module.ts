@@ -3,11 +3,10 @@ import { CommonModule } from '@angular/common';
 
 import { GameRoutingModule } from './game-routing.module';
 import { GameComponent } from './game.component';
-import { PetComponent } from './pet/pet.component';
 import { MenuComponent } from './menu/menu.component';
 
 @NgModule({
-  declarations: [GameComponent, PetComponent, MenuComponent],
+  declarations: [GameComponent, MenuComponent],
   imports: [
     CommonModule,
     GameRoutingModule

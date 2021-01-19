@@ -1,1 +1,26 @@
-<h1>{{data.user?.nome}}</h1>
+<header>
+  <a routerLink="/" id="avatar">
+    <img *ngIf="data.user" src="/assets/img/avatar/{{data.user?.avatar}}.png" alt="{{data.user?.nome}}" />
+  </a>
+  <h1><img src="/assets/img/menu/logo.png" alt="Zoiland" /></h1>
+  <nav>
+    <a routerLink="/" routerLinkActive="active">
+      <img src="/assets/img/menu/ico1.png" alt="Meus Pests" />
+      Meus Pets
+    </a>
+    <a routerLink="/" routerLinkActive="active">
+      <img src="/assets/img/menu/ico2.png" alt="Explorar" />
+      Explorar
+    </a>
+    <a routerLink="/" routerLinkActive="active">
+      <img src="/assets/img/menu/ico3.png" alt="Bolsa" />
+      Bolsa
+    </a>
+    <a routerLink="/" routerLinkActive="active">
+      <img src="/assets/img/menu/ico4.png" alt="Conta" />
+      Conta
+    </a>
+  </nav>
+  <span><span>ZP:</span> {{data.user?.zoicoin | number:'1.2-2': 'en-US'}}</span>
+  <span><span>ZT:</span> {{zoiTime}}</span>
+</header>
