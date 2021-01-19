@@ -14,6 +14,7 @@ export class UserService {
   ) { }
 
   get(){
+    console.log('Token: ', localStorage.getItem('token'))
     this.api.get('user').subscribe(
       (res:any)=>{
         this.data.user = res.user
