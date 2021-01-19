@@ -21,16 +21,18 @@ export class AuthComponent implements OnInit {
   }
 
   mudarBanner(){
-    const indexOld = this.index;
-    const banner = document.querySelector('section>div>span');
-    this.index++;
-    if(this.index > (this.imgArray.length - 1)){ this.index = 0; }
-    banner.animate([
-      {opacity: 0},
-      {opacity: 1}
-    ], {duration: 1000});
-    this.bgNow = this.imgArray[this.index];
-    this.bgOld = this.imgArray[indexOld];
+    if(document.querySelector('section>div>span')){
+      const indexOld = this.index;
+      const banner = document.querySelector('section>div>span');
+      this.index++;
+      if(this.index > (this.imgArray.length - 1)){ this.index = 0; }
+      banner.animate([
+        {opacity: 0},
+        {opacity: 1}
+      ], {duration: 1000});
+      this.bgNow = this.imgArray[this.index];
+      this.bgOld = this.imgArray[indexOld];
+    }
   }
 
   embaralharArray(array) {
