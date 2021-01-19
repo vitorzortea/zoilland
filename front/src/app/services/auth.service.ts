@@ -19,7 +19,7 @@ export class AuthService {
       (res)=>{
         alert('Usuário criado');
         this.loginAPI(body).subscribe(
-          (res: {user, token})=>{this.login(res)},
+          (res:any)=>{this.login(res)},
           (error)=>{console.log(error)}
         );
       },
@@ -29,7 +29,7 @@ export class AuthService {
 
   loginAPI(body){ return this.api.post('login', {email: body.email, senha: body.senha});  }
 
-  login(res: {user, token}){
+  login(res:any){
     localStorage.setItem('token', res.token);
     localStorage.setItem('user', JSON.stringify(res.user));
     this.router.navigate(['/']);

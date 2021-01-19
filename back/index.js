@@ -1,11 +1,17 @@
 const restify = require('restify');
 const errs = require('restify-errors');
 const jwt = require('jsonwebtoken');
+const corsMiddleware = require('restify-cors-middleware');
 const SECRET = 'meuSecret';
 
 const server = restify.createServer({
   name: 'myapp',
   version: '1.0.0'
+});
+const cors = corsMiddleware({  
+    origins: ["*"],
+    allowHeaders: ["Authorization", "x-access-token"],
+    exposeHeaders: ["Authorization"]
 });
 
 const knex = require('knex')({
@@ -18,9 +24,11 @@ const knex = require('knex')({
     }
 });
 
+server.pre(cors.preflight);  
 server.use(restify.plugins.acceptParser(server.acceptable));
 server.use(restify.plugins.queryParser());
 server.use(restify.plugins.bodyParser());
+server.use(cors.actual);
 
 server.listen(8080, function () {
   console.log('%s listening at %s', server.name, server.url);
@@ -35,6 +43,13 @@ server.get('/', verifyJWT, (req, res, next) => {
 });
 
 //Autenticação
+server.post('/newuser', (req, res, next) => {
+    knex('users')
+        .insert(req.body)
+        .then((dados) => {
+            res.send({create: true, data: dados});
+        }, next);
+});
 server.post('/login', (req, res, next) => {
     const { email, senha } = req.body;
     knex('users')
@@ -44,7 +59,16 @@ server.post('/login', (req, res, next) => {
         .then((dados) => {
             if(!dados) return res.send(new errs.BadRequestError('Email ou senha invalidos'))
             const token = jwt.sign({idusers: dados.idusers}, SECRET, {expiresIn: 30000});
-            res.send({auth: true, token: token});
+            res.send({
+                token: token,
+                user: {
+                    nome: dados.nome,
+                    email: dados.email,
+                    avatar: dados.avatar,
+                    createOn: dados.createOn,
+                    zoicoin: dados.zoicoin
+                }
+            });
         }, next)
 });
 
@@ -59,11 +83,23 @@ function verifyJWT(req, res, next){
 
 
 //Usuários
-server.post('/user', (req, res, next) => {
+server.get('/user', verifyJWT, (req, res, next) => {
+    const token = req.headers['x-access-token'];
+    const decoded = jwt.verify(token, SECRET);
+    const userId = decoded.idusers;
     knex('users')
-        .insert(req.body)
+        .where('idusers', userId)
+        .first()
         .then((dados) => {
-            res.send(dados);
+            if(!dados) return res.send(new errs.BadRequestError('User invalidos'))
+            res.send({
+                user: {
+                    nome: dados.nome,
+                    email: dados.email,
+                    avatar: dados.avatar,
+                    zoicoin: dados.zoicoin
+                }
+            });
         }, next)
 });
 

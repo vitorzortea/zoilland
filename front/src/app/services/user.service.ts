@@ -15,7 +15,7 @@ export class UserService {
 
   get(){
     this.api.get('user').subscribe(
-      (res: {user})=>{
+      (res:any)=>{
         this.data.user = res.user
         console.log(this.data.user)
       },

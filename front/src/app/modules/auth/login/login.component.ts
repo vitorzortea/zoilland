@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
       return
     }
     this.api.loginAPI({email: this.email, senha: this.senha}).subscribe(
-      (res: {user, token})=>{this.api.login(res)},
+      (res:any) => { this.api.login(res) },
       (error)=>{ this.error = error.error.message; }
     );
   }
