@@ -104,6 +104,53 @@ server.get('/user', verifyJWT, (req, res, next) => {
 });
 
 //Pet
+server.get('/pet', verifyJWT, (req, res, next) => {
+    const token = req.headers['x-access-token'];
+    const decoded = jwt.verify(token, SECRET);
+    const userId = decoded.idusers;
+    knex('pet')
+        .where('users_idusers', userId)
+        .then((pet) => {
+            knex('especie').then((especie)=>{
+                const pets = pet.map(element => {
+                    const index = especie.findIndex((element2)=> element2.idespecie == element.especie_idespecie);
+                    element.especie = especie[index];
+                    const hj = new Date();
+                    const timeDiff = Math.abs(hj.getTime() - element.data.getTime());
+                    const diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
+                    let status = 'Bebê'
+                    let foto = element.especie.pic0
+                    let colect = element.especie.colect0
+                    if(diffDays >= element.especie.dia1 && diffDays < element.especie.dia2){
+                        status = 'Criança'
+                        foto = element.especie.pic1
+                        colect = element.especie.colect1
+                    }
+                    if(diffDays >= element.especie.dia2 && diffDays < element.especie.dia3){
+                        status = 'Adulto'
+                        foto = element.especie.pic2
+                        colect = element.especie.colect2
+                    }
+                    if(diffDays >= element.especie.dia3){
+                        status = 'Ansião'
+                        foto = element.especie.pic3
+                        colect = element.especie.colect3
+                    }
+                    return {
+                        id: element.idpet,
+                        nivel: element.nivel,
+                        nome: element.nome,
+                        colect: colect,
+                        tipo: element.especie.tipo,
+                        dias: diffDays,
+                        status: status,
+                        img: foto,
+                    }
+                });
+                res.send(pets);
+            })
+        }, next)
+});
 server.post('/pet/create', verifyJWT, (req, res, next) => {
     const token = req.headers['x-access-token'];
     const decoded = jwt.verify(token, SECRET);
@@ -123,7 +170,7 @@ server.post('/pet/create', verifyJWT, (req, res, next) => {
             especie_idespecie: req.body.tipo
         })
         .then((dados) => {
-            res.send({message: 'Pet Criado', pet: dados, body: req.body});
+            res.send({message: 'Pet Criado', pet: dados});
         }, next)
 });
 
